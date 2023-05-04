@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 import { Questions } from '../types'
 import { persist } from 'zustand/middleware'
+import { exampleQuestions } from '../assets/questions'
+
 interface State {
   questions: Questions[]
   currentQuestion: number
@@ -15,9 +17,9 @@ export const useQuestionsStore = create<State>()(persist((set, get) => {
     questions: [],
     currentQuestion: 0,
     fetchQuestions: async (limit: number) => {
-      const res = await fetch('https://js-examplequizz.netlify.app/data.json')
-      const json = await res.json()
-      const questions = json.sort(() => Math.random() - 0.5).slice(0, limit)
+      //const res = await fetch('https://js-examplequizz.netlify.app/data.json')
+      //const json = await res.json()
+      const questions = exampleQuestions.sort(() => Math.random() - 0.5).slice(0, limit)
       set({ questions })
     },
     selectAnswer: (questionId, answersIndex) => {
